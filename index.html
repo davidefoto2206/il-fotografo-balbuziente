@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Il Fotografo Balbuziente</title>
+  <!-- Google Fonts per un look editoriale e curato -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Reenie+Beanie&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Kalam:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-ardesia: #1E2225;
-      --postit-bg: #F4E8C1;
-      --postit-text: #2A2A2A;
-      --text-light: #E5E7EB;
-      --text-muted: #9CA3AF;
+      --ardesia: #181B1E;
+      --ardesia-soft: #23272B;
+      --postit-bg: #F4E8B1;
+      --postit-shadow: 0 12px 24px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0,0,0,0.2);
+      --text-main: #2C2C2C;
+      --text-light: #E2E8F0;
+      --text-muted: #8A99AD;
     }
 
     * {
@@ -23,257 +27,319 @@
     }
 
     body {
-      background-color: var(--bg-ardesia);
+      background-color: var(--ardesia);
       color: var(--text-light);
-      font-family: 'Lora', serif;
+      font-family: 'Cormorant Garamond', serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 3rem 1.5rem;
-      position: relative;
+      justify-content: space-between;
+      padding: 4rem 2rem;
+      overflow-x: hidden;
     }
 
+    /* Sfondo texture sottile per dare profondità all'ardesia */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header & Manifesto */
     header {
       text-align: center;
-      max-width: 650px;
       margin-bottom: 4rem;
     }
 
     h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      color: #F8FAFC;
       margin-bottom: 0.8rem;
     }
 
     p.manifesto {
       font-style: italic;
       color: var(--text-muted);
-      font-size: 1.2rem;
-      line-height: 1.6;
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
     }
 
-    /* Scrivania con i Post-it */
+    /* La Scrivania con i Post-it */
     .desk {
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 2.5rem;
       justify-content: center;
-      max-width: 1000px;
-      margin-bottom: 4rem;
+      width: 100%;
+      margin-bottom: 3rem;
     }
 
     .postit {
       background-color: var(--postit-bg);
-      color: var(--postit-text);
-      width: 260px;
-      height: 260px;
-      padding: 1.5rem;
+      color: var(--text-main);
+      width: 240px;
+      height: 240px;
+      padding: 2rem 1.8rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: var(--postit-shadow);
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
       position: relative;
+      border-top: 1px solid rgba(255,255,255,0.4);
     }
 
-    .postit:nth-child(1) { transform: rotate(-3deg); }
-    .postit:nth-child(2) { transform: rotate(2deg); }
-    .postit:nth-child(3) { transform: rotate(-1.5deg); }
+    /* Inclinazioni naturali dei post-it sulla scrivania */
+    .postit:nth-child(1) { transform: rotate(-2.5deg); }
+    .postit:nth-child(2) { transform: rotate(1.5deg); }
+    .postit:nth-child(3) { transform: rotate(-1deg); }
 
     .postit:hover {
-      transform: rotate(0deg) scale(1.04);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.6), 0 4px 10px rgba(0,0,0,0.3);
+      transform: rotate(0deg) scale(1.05) translateY(-6px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0,0,0,0.25);
       z-index: 10;
     }
 
     .postit-title {
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 2.2rem;
-      line-height: 1.1;
-      font-weight: bold;
+      font-family: 'Kalam', cursive;
+      font-size: 2rem;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #1F2937;
     }
 
-    .postit-desc {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.85rem;
+    .postit-action {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      opacity: 0.7;
+      letter-spacing: 0.12em;
+      color: #6B7280;
+      font-weight: 500;
     }
 
-    /* Modale / Sezione Interna */
+    /* Pagine / Sezioni interne (nascoste di default) */
     .view-section {
       display: none;
-      max-width: 750px;
-      background: rgba(30, 34, 37, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2.5rem;
-      border-radius: 4px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      margin-top: 1rem;
+      width: 100%;
+      background: var(--ardesia-soft);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 3rem;
+      border-radius: 6px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .view-section.active {
       display: block;
-      animation: fadeIn 0.4s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .btn-back {
       display: inline-block;
       background: var(--postit-bg);
-      color: var(--postit-text);
-      padding: 0.5rem 1rem;
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 1.4rem;
+      color: var(--text-main);
+      padding: 0.4rem 1rem;
+      font-family: 'Kalam', cursive;
+      font-size: 1.25rem;
       text-decoration: none;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       cursor: pointer;
       border: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
     }
 
-    .bio-text {
-      line-height: 1.8;
-      font-size: 1.05rem;
-      color: #D1D5DB;
+    .btn-back:hover {
+      transform: scale(1.03);
     }
 
-    .bio-text p {
-      margin-bottom: 1.5rem;
+    .bio-content {
+      font-size: 1.25rem;
+      line-height: 1.85;
+      color: #CBD5E1;
     }
 
-    .bio-text ul {
-      list-style-type: none;
-      margin-bottom: 1.5rem;
-      padding-left: 1rem;
+    .bio-content p {
+      margin-bottom: 1.8rem;
     }
 
-    .bio-text li {
-      margin-bottom: 0.8rem;
+    .bio-content ul {
+      list-style: none;
+      margin: 2rem 0;
+      padding-left: 0;
+    }
+
+    .bio-content li {
+      margin-bottom: 1.2rem;
       position: relative;
+      padding-left: 1.5rem;
     }
 
-    .bio-text li::before {
-      content: "•";
+    .bio-content li::before {
+      content: "—";
       color: var(--postit-bg);
       position: absolute;
-      left: -1rem;
+      left: 0;
+      font-weight: bold;
     }
 
+    /* Griglia galleria Promemoria visivi */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
-    .gallery-item {
-      background: #2A2F33;
-      padding: 0.8rem;
-      text-align: center;
+    .gallery-card {
+      background: #181B1E;
+      padding: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.04);
     }
 
-    .gallery-item img {
+    .gallery-card img {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+      filter: brightness(0.95);
+      transition: filter 0.3s;
     }
 
-    .gallery-item span {
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 1.5rem;
+    .gallery-card img:hover {
+      filter: brightness(1);
+    }
+
+    .gallery-card span {
+      font-family: 'Kalam', cursive;
+      font-size: 1.35rem;
       color: var(--postit-bg);
+      display: block;
+    }
+
+    footer {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Il Fotografo Balbuziente</h1>
-    <p class="manifesto">"Questo è un sito balbuziente. Dategli respiro."</p>
-  </header>
+  <div class="container">
+    <header id="mainHeader">
+      <h1>Il Fotografo Balbuziente</h1>
+      <p class="manifesto">"Questo è un sito balbuziente. Dategli respiro."</p>
+    </header>
 
-  <main class="desk" id="mainDesk">
-    <div class="postit" onclick="openSection('sec-bio')">
-      <div class="postit-title">Chi sono<br>(più o meno)</div>
-      <div class="postit-desc">→ Apri nota</div>
-    </div>
-
-    <div class="postit" onclick="openSection('sec-gallery')">
-      <div class="postit-title">Promemoria<br>visivi</div>
-      <div class="postit-desc">→ Sfoglia foto</div>
-    </div>
-
-    <div class="postit" onclick="openSection('sec-newsletter')">
-      <div class="postit-title">Prendi un<br>Post-it</div>
-      <div class="postit-desc">→ Newsletter</div>
-    </div>
-  </main>
-
-  <!-- SEZIONE CHI SONO -->
-  <section id="sec-bio" class="view-section">
-    <button class="btn-back" onclick="closeSections()">[ Torna alla Scrivania ]</button>
-    <div class="bio-text">
-      <p>Se sei arrivato fin qui, probabilmente ti stai chiedendo perché un fotografo debba inserire la parola "Balbuziente" nel proprio nome.</p>
-      <p>Intendiamoci: se avessi potuto scegliere, avrei fatto volentieri a meno di balbettare. Non c'è nessuna medaglia al merito e non mi sento certo un saggio, semmai un sopravvissuto alla situazione. Quando ogni parola costa fatica, impari a tue spese che è meglio pensarci due volte prima di aprir bocca. E a mio malgrado, quella stessa balbuzie mi dà (mannaggia!) il tempo di osservare il mondo, di ascoltare di più e di aspettare che l'ansia passi.</p>
-      <p>La fotografia per me è arrivata così, per caso, in un periodo faticoso e molto affannato della mia vita. Non mi ha conquistato per il suo lato artistico — la fotografia ce l'ha di sicuro, ma non è il mio caso, soprattutto per mie mancanze tecniche — ma perché ho trovato in essa un ottimo esercizio per ricordarmi certe cose che erano sempre state presenti nel mio percorso e che rischiavo di perdere.</p>
-      <p>Quando scatto, faccio esattamente quello che ho aprendido a fare con le parole:</p>
-      <ul>
-        <li><strong>Non scatto per riempire un vuoto:</strong> Non c'è la fretta di portare a casa centinaia di fotogrammi nella speranga che uno sia quello giusto.</li>
-        <li><strong>Aspetto che le cose accadano:</strong> L'inquadratura è l'attesa di una luce o di un equilibrio che meriti davvero di essere registrato.</li>
-        <li><strong>Lavoro senza scorciatoie mentali:</strong> Il file digitale viene curato a mano, passo dopo passo, con la stessa pazienza con cui si cerca la parola giusta da dire.</li>
-      </ul>
-      <p>Non c'è nessuna filosofia mistica in questo, ma solo una disciplina pratica nata sul campo (e un po' per disperazione). Spero che le immagini che vedi qui funzionino come piccoli post-it visivi. Il ricordo di qualcosa che è importante e merita di trovare di nuovo spazio nella tua vita.</p>
-    </div>
-  </section>
-
-  <!-- SEZIONE GALLERIA -->
-  <section id="sec-gallery" class="view-section">
-    <button class="btn-back" onclick="closeSections()">[ Torna alla Scrivania ]</button>
-    <h2 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 1rem;">Promemoria visivi</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Foto 1">
-        <span>#01 - Luce d'attesa</span>
+    <!-- LA SCRIVANIA PRINCIPALE -->
+    <main class="desk" id="mainDesk">
+      <div class="postit" onclick="switchView('sec-bio')">
+        <div class="postit-title">Chi sono<br>(più o meno)</div>
+        <div class="postit-action">Leggi nota →</div>
       </div>
-      <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=600&q=80" alt="Foto 2">
-        <span>#02 - Silenzio urbano</span>
-      </div>
-    </div>
-  </section>
 
-  <!-- SEZIONE NEWSLETTER -->
-  <section id="sec-newsletter" class="view-section">
-    <button class="btn-back" onclick="closeSections()">[ Torna alla Scrivania ]</button>
-    <h2 style="font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 1rem;">Prendi un Post-it</h2>
-    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Lascia la tua mail se ti va di ricevere qualche scatto ogni tanto, senza fretta e senza spam.</p>
-    <form style="display: flex; gap: 0.5rem; flex-wrap: wrap;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
-      <input type="email" placeholder="La tua email..." required style="padding: 0.8rem; flex: 1; border: none; background: #2A2F33; color: white;">
-      <button type="submit" style="background: var(--postit-bg); border: none; padding: 0.8rem 1.2rem; font-weight: bold; cursor: pointer;">Iscriviti (ma pensaci!)</button>
-    </form>
-  </section>
+      <div class="postit" onclick="switchView('sec-gallery')">
+        <div class="postit-title">Promemoria<br>visivi</div>
+        <div class="postit-action">Sfoglia scatti →</div>
+      </div>
+
+      <div class="postit" onclick="switchView('sec-newsletter')">
+        <div class="postit-title">Prendi un<br>Post-it</div>
+        <div class="postit-action">Scrivimi →</div>
+      </div>
+    </main>
+
+    <!-- SEZIONE: CHI SONO -->
+    <section id="sec-bio" class="view-section">
+      <button class="btn-back" onclick="goHome()">[ Torna alla Scrivania ]</button>
+      <div class="bio-content">
+        <p>Se sei arrivato fin qui, probabilmente ti stai chiedendo perché un fotografo debba inserire la parola "Balbuziente" nel proprio nome.</p>
+        <p>Intendiamoci: se avessi potuto scegliere, avrei fatto volentieri a meno di balbettare. Non c'è nessuna medaglia al merito e non mi sento certo un saggio, semmai un sopravvissuto alla situazione. Quando ogni parola costa fatica, impari a tue spese che è meglio pensarci due volte prima di aprir bocca. E a mio malgrado, quella stessa balbuzie mi dà (mannaggia!) il tempo di osservare il mondo, di ascoltare di più e di aspettare che l'ansia passi.</p>
+        <p>La fotografia per me è arrivata così, per caso, in un periodo faticoso e molto affannato della mia vita. Non mi ha conquistato per il suo lato artistico — la fotografia ce l'ha di sicuro, ma non è il mio caso, soprattutto per mie mancanze tecniche — ma perché ho trovato in essa un ottimo esercizio per ricordarmi certe cose che erano sempre state presenti nel mio percorso e che rischiavo di perdere.</p>
+        <p>Quando scatto, faccio esattamente quello che ho imparato a fare con le parole:</p>
+        <ul>
+          <li><strong>Non scatto per riempire un vuoto:</strong> Non c'è la fretta di portare a casa centinaia di fotogrammi nella speranza che uno sia quello giusto.</li>
+          <li><strong>Aspetto che le cose accadano:</strong> L'inquadratura è l'attesa di una luce o di un equilibrio che meriti davvero di essere registrato.</li>
+          <li><strong>Lavoro senza scorciatoie mentali:</strong> Il file digitale viene curato a mano, passo dopo passo, con la stessa pazienza con cui si cerca la parola giusta da dire.</li>
+        </ul>
+        <p>Non c'è nessuna filosofia mistica in questo, ma solo una disciplina pratica nata sul campo. Spero che le immagini che vedi qui funzionino come piccoli post-it visivi: il ricordo di qualcosa che per mille ragioni abbiamo lasciato indietro, ma che invece merita di trovare di nuovo spazio nella tua vita.</p>
+      </div>
+    </section>
+
+    <!-- SEZIONE: PROMEMORIA VISIVI -->
+    <section id="sec-gallery" class="view-section">
+      <button class="btn-back" onclick="goHome()">[ Torna alla Scrivania ]</button>
+      <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 1.8rem; margin-bottom: 1.5rem; color: #F8FAFC;">Promemoria visivi</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80" alt="Scatto 1">
+          <span>#01 - Luce d'attesa</span>
+        </div>
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?auto=format&fit=crop&w=700&q=80" alt="Scatto 2">
+          <span>#02 - Silenzio urbano</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEZIONE: NEWSLETTER / PRENDI UN POST-IT -->
+    <section id="sec-newsletter" class="view-section">
+      <button class="btn-back" onclick="goHome()">[ Torna alla Scrivania ]</button>
+      <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 1.8rem; margin-bottom: 1rem; color: #F8FAFC;">Prendi un Post-it</h2>
+      <p style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 2rem;">Lascia la tua mail se ti va di ricevere qualche scatto e un pensiero ogni tanto, senza la frenesia della newsletter di massa.</p>
+      <form onsubmit="event.preventDefault(); alert('Grazie. Ti sei preso un post-it.');" style="display: flex; gap: 1rem; flex-wrap: wrap; max-width: 500px;">
+        <input type="email" placeholder="La tua email..." required style="padding: 0.9rem 1rem; flex: 1; background: #181B1E; border: 1px solid rgba(255,255,255,0.15); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1rem;">
+        <button type="submit" style="background: var(--postit-bg); border: none; padding: 0.9rem 1.5rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; cursor: pointer; color: #1F2937;">Iscriviti</button>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <p>© Il Fotografo Balbuziente</p>
+  </footer>
 
   <script>
-    function openSection(id) {
+    function switchView(sectionId) {
+      document.getElementById('mainHeader').style.display = 'none';
       document.getElementById('mainDesk').style.display = 'none';
       document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      document.getElementById(sectionId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function closeSections() {
+    function goHome() {
       document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('mainHeader').style.display = 'block';
       document.getElementById('mainDesk').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
